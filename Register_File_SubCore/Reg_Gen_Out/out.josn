@@ -1,0 +1,52 @@
+{
+    "type": "addrmap",
+    "inst_name": "rv32i_reg_file",
+    "addr_offset": 0,
+    "children": [
+        {
+            "type": "reg",
+            "inst_name": "X0",
+            "addr_offset": 0,
+            "children": [
+                {
+                    "type": "field",
+                    "inst_name": "x0_zero",
+                    "lsb": 0,
+                    "msb": 31,
+                    "reset": 0,
+                    "sw_access": "r"
+                }
+            ]
+        },
+        {
+            "type": "reg",
+            "inst_name": "XRA",
+            "addr_offset": 4,
+            "children": [
+                {
+                    "type": "field",
+                    "inst_name": "xra",
+                    "lsb": 0,
+                    "msb": 31,
+                    "reset": 0,
+                    "sw_access": "rw"
+                }
+            ]
+        },
+        {
+            "type": "reg",
+            "inst_name": "XSP",
+            "addr_offset": 8,
+            "children": [
+                {
+                    "type": "field",
+                    "inst_name": "xsp",
+                    "lsb": 0,
+                    "msb": 31,
+                    "reset": 0,
+                    "sw_access": "rw"
+                }
+            ]
+        }
+    ]
+}
