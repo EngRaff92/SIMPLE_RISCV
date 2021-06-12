@@ -3,7 +3,7 @@
 // Parameters
 parameter REG_NUMBER    = 32;
 parameter REG_DATA_W    = 32;
-parameter ADDR_WIDTH    = 6; //$clog2(REG_NMBER);
+parameter ADDR_WIDTH    = 5; //$clog2(REG_NMBER);
 
 // Enum
 typedef enum{  

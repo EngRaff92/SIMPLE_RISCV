@@ -10,16 +10,18 @@ interface regfile_if(input bit clk, output bit ares);
     // Task issue single write write the write is CLOKED
     task issue_wr(  input bit [ADDR_WIDTH-1:0] addr, 
                     input bit [REG_DATA_W-1:0] wd);
+        `ifdef DEBUG
         $display("Rquesting write at address: %0h with data: %0h",addr,wd);
-        @(posedge clk);
+        `endif
+        wen = 1;
         waddr = addr;
         wdata = wd;
-        wen = 1;
+        @(posedge clk);
         // Clocking blocks are not yet supported with signals
         // cb_wr.waddr = addr;
         // cb_wr.wdata = wd;
-        @(negedge clk);
         wen = 0;
+        @(negedge clk);
     endtask
 
     // Task to issue a single read to port 1
@@ -27,8 +29,12 @@ interface regfile_if(input bit clk, output bit ares);
                     output bit [REG_DATA_W-1:0] rd1);
         raddr1 = addr;
         rd1 = rdata1;
-        // No Race
-        $monitor("Rquesting read 1 at address: %0h with data: %0h",addr,rdata1);            
+        // No Race seems like $monitor are kinda of buffered 2 monitors clashed using display
+        `ifdef DEBUG
+        $display("Rquesting read 1 at address: %0h with data: %0h at time: %0t",addr,rdata1,$time());   
+        `endif
+        // wait
+        @(negedge clk);               
     endtask
 
     // Task to issue a single read to port 1
@@ -36,8 +42,12 @@ interface regfile_if(input bit clk, output bit ares);
                     output bit [REG_DATA_W-1:0] rd2);
         raddr2 = addr;
         rd2 = rdata2;
-        // No Race
-        $monitor("Rquesting read 2 at address: %0h with data: %0h",addr,rdata2);            
+        // No Race seems like $monitor are kinda of buffered 2 monitors clashed using display
+        `ifdef DEBUG
+        $display("Rquesting read 2 at address: %0h with data: %0h at time: %0t",addr,rdata2,$time());      
+        `endif
+        // wait 
+        @(negedge clk);      
     endtask
 
     // Task used to issue the reset
@@ -49,6 +59,8 @@ interface regfile_if(input bit clk, output bit ares);
         #20;
         ares = 0;
         $display("DUT out of reset");
+        // wait 
+        repeat(2) @(posedge clk);    
     endtask
 
     /* not yet supported by Icarus v11 */
@@ -58,7 +70,3 @@ interface regfile_if(input bit clk, output bit ares);
     //     output waddr, wdata;
     // endclocking: cb_wr
 endinterface
-
-// program test1(interface pif);
-//     initial pif.issue_reset();
-// endprogram
