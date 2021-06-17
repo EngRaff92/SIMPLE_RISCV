@@ -1,7 +1,5 @@
-module instr_mem module name #(
-    // list of Params
-) (
-    input logic [$clog2(N_WORDS)-1:0] i_addr,
+module instr_mem (
+    input logic [ADDR_W-1:0] i_addr,
     output logic [INSTR_LEN-1:0] i_data_out
 );
     
@@ -10,4 +8,4 @@ module instr_mem module name #(
 
     // Drive Output assumig the Program Counter is already Cutshorted
     assign i_data_out = instr_mem_array[i_addr];
-endmodule)
+endmodule
