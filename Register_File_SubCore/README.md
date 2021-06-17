@@ -73,7 +73,8 @@ To run a single scenario you can use, the selector uses the "valueplusargs":
 
 ## Block Diagram
 
-![Block Diagram](/Users/raffaelemac/Desktop/Block_Diagram.png)
+![Block Diagram](https://github.com/EngRaff92/SIMPLE_RISCV/blob/main/Register_File_SubCore/Block_Diagram.png)
+
 
 ## List of Registers And Usage
 
