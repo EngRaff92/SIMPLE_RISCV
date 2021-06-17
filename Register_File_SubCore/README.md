@@ -51,7 +51,48 @@ The main requiremts are the following:
 
 ## How to Run ##
 
+Here are the main directives you might use in the main Makefile
 
+* **compile**: this just compile the design using Icarus with some standards flags
+* **sim**: This rule runs the sim directly. It calles the compilation before so no need to run compile again
+* **debug**: this compiles and executes the simulation with the debug switch set in order to get some useful debug information from the TB
+* **wave**: open up the waves using GTKwave
+* **clean**: simply removes the VVP generated file
+
+This RTL has been tested using 5 main Scenarios:
+
+* Scenario_0: Incremenatl Write where we write all the registyers and we read them back through the 2 Read ports available. This is the default scenario so if no scenarios is selected the this will run
+* Scenario_1: Back To Back access we Read from Port 1 we write and the we read back from port 2 this scenario is called RWR
+* Scenario_2: Reset scenario where we issue the reset and then we read all the regsiters back
+* Scenario_3: Parallel access where we test out the priority. The Read is fully combo meaning that is not waiting for clocks so resolved in Active Reagion immediately. The write runs with the clock so it takes longer. This will ensure that Write will never win against the read.
+
+To run a single scenario you can use, the selector uses the "valueplusargs":
+
+* make sim -> vvp +s=0,1,2,3
+* make debug -> vvp +s=0,1,2,3
+
+## Block Diagram
+
+![Block Diagram](/Users/raffaelemac/Desktop/Schermata 2021-06-17 alle 20.14.25.png)
+
+## List of Registers And Usage
+
+| Register Name | Usage                   | ABI name |
+| ------------- | ----------------------- | -------- |
+| x0            | Hard Wired Zero         | zero     |
+| x1            | Return Address          | ra       |
+| X2            | Stack Pointer           | sp       |
+| x3            | Global pointer          | gp       |
+| x4            | Thread Pointer          | tp       |
+| x5            | Temporary link register | t0       |
+| x6-x7         | Temporaries             | t1-t2    |
+| x8            | Frame Pointer           | fp       |
+| x9            | Saved Register          | s1       |
+| x10-x11       | Return Values           | a0-a1    |
+| x12-x17       | Function Arguments      | a2-a7    |
+| x18-x27       | Saved Registers         | s2-s11   |
+| x38-x31       | Temporaries             | t3-t6    |
+|               |                         |          |
 
 
 
