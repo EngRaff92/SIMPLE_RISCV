@@ -73,7 +73,7 @@ To run a single scenario you can use, the selector uses the "valueplusargs":
 
 ## Block Diagram
 
-![Block Diagram](/Users/raffaelemac/Desktop/Schermata 2021-06-17 alle 20.14.25.png)
+![Block Diagram](/Users/raffaelemac/Desktop/Block_Diagram.png)
 
 ## List of Registers And Usage
 
